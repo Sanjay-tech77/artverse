@@ -8,7 +8,7 @@ export const sampleArtworks: Artwork[] = [
     description: 'A half-length portrait painting by Italian artist Leonardo da Vinci, considered an archetypal masterpiece of the Italian Renaissance.',
     price: 100000000, // Mock price
     category: 'Renaissance',
-    imageUrl: 'https://picsum.photos/seed/mona-lisa/600/800',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/800px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg',
     medium: 'Oil on Poplar Panel',
     dimensions: '77 cm × 53 cm',
     year: 1506, // Approx completion
@@ -20,7 +20,7 @@ export const sampleArtworks: Artwork[] = [
     description: 'An oil-on-canvas painting by Dutch Post-Impressionist painter Vincent van Gogh, depicting his view from the window of his asylum room.',
     price: 90000000, // Mock price
     category: 'Post-Impressionism',
-    imageUrl: 'https://picsum.photos/seed/starry-night/600/800',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/800px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg',
     medium: 'Oil on Canvas',
     dimensions: '73.7 cm × 92.1 cm',
     year: 1889,
@@ -32,7 +32,7 @@ export const sampleArtworks: Artwork[] = [
     description: 'A 1931 painting by artist Salvador Dalí, and one of the most recognizable works of Surrealism, depicting soft, melting pocket watches.',
     price: 75000000, // Mock price
     category: 'Surrealism',
-    imageUrl: 'https://picsum.photos/seed/persistence-memory/600/800',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/dd/The_Persistence_of_Memory.jpg/800px-The_Persistence_of_Memory.jpg',
     medium: 'Oil on Canvas',
     dimensions: '24 cm × 33 cm',
     year: 1931,
@@ -44,7 +44,7 @@ export const sampleArtworks: Artwork[] = [
     description: 'An oil painting by Dutch Golden Age painter Johannes Vermeer, dated c. 1665. It depicts a European girl wearing an exotic dress, an oriental turban, and a very large pearl earring.',
     price: 85000000, // Mock price
     category: 'Baroque',
-    imageUrl: 'https://picsum.photos/seed/pearl-earring/600/800',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/800px-1665_Girl_with_a_Pearl_Earring.jpg',
     medium: 'Oil on Canvas',
     dimensions: '44.5 cm × 39 cm',
     year: 1665,
@@ -56,7 +56,7 @@ export const sampleArtworks: Artwork[] = [
     description: 'A composition created by Norwegian Expressionist artist Edvard Munch in 1893. The agonized face in the painting has become one of the most iconic images of art.',
     price: 70000000, // Mock price
     category: 'Expressionism',
-    imageUrl: 'https://picsum.photos/seed/the-scream/600/800',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/800px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg',
     medium: 'Oil, Tempera, Pastel and Crayon on Cardboard',
     dimensions: '91 cm × 73.5 cm',
     year: 1893,
@@ -68,7 +68,7 @@ export const sampleArtworks: Artwork[] = [
     description: 'A mural painting by the Italian High Renaissance artist Leonardo da Vinci, dated to c. 1495–1498. The painting represents the scene of the Last Supper of Jesus with his apostles.',
     price: 120000000, // Mock price
     category: 'Renaissance',
-    imageUrl: 'https://picsum.photos/seed/last-supper/800/600', // Wider format
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Leonardo_da_Vinci_-_The_Last_Supper_-_Santa_Maria_delle_Grazie_-_Milan_High_Res.jpg/1280px-Leonardo_da_Vinci_-_The_Last_Supper_-_Santa_Maria_delle_Grazie_-_Milan_High_Res.jpg',
     medium: 'Tempera on Gesso, Pitch and Mastic',
     dimensions: '460 cm × 880 cm',
     year: 1498, // Approx completion
@@ -80,7 +80,7 @@ export const sampleArtworks: Artwork[] = [
     description: 'A large 1937 oil painting on canvas by Spanish artist Pablo Picasso. It is one of his best-known works, regarded by many art critics as the most moving and powerful anti-war painting in history.',
     price: 110000000, // Mock price
     category: 'Cubism',
-    imageUrl: 'https://picsum.photos/seed/guernica/800/600', // Wider format
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/74/PicassoGuernica.jpg/1280px-PicassoGuernica.jpg',
     medium: 'Oil on Canvas',
     dimensions: '349 cm × 776 cm',
     year: 1937,
@@ -92,9 +92,57 @@ export const sampleArtworks: Artwork[] = [
     description: 'Militia Company of District II under the Command of Captain Frans Banninck Cocq, commonly referred to as The Night Watch. Painted in 1642 by Rembrandt van Rijn.',
     price: 95000000, // Mock price
     category: 'Baroque',
-    imageUrl: 'https://picsum.photos/seed/night-watch/800/700', // Slightly different aspect ratio
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/The_Night_Watch_-_Rembrandt_van_Rijn.jpg/1280px-The_Night_Watch_-_Rembrandt_van_Rijn.jpg',
     medium: 'Oil on Canvas',
     dimensions: '363 cm × 437 cm',
     year: 1642,
   },
+  {
+    id: '9',
+    title: 'Impression, soleil levant',
+    artist: 'Claude Monet',
+    description: 'A painting by Claude Monet first shown at what would become known as the "Exhibition of the Impressionists" in Paris in April, 1874. The painting is credited with inspiring the name of the Impressionist movement.',
+    price: 65000000,
+    category: 'Impressionism',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Monet_-_Impression%2C_soleil_levant.jpg/800px-Monet_-_Impression%2C_soleil_levant.jpg',
+    medium: 'Oil on Canvas',
+    dimensions: '48 cm × 63 cm',
+    year: 1872,
+  },
+  {
+    id: '10',
+    title: 'American Gothic',
+    artist: 'Grant Wood',
+    description: 'A 1930 painting by Grant Wood in the collection of the Art Institute of Chicago. Wood was inspired to paint what is now known as the American Gothic House in Eldon, Iowa, along with "the kind of people I fancied should live in that house".',
+    price: 50000000,
+    category: 'Modernism',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg/800px-Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg',
+    medium: 'Oil on Beaver Board',
+    dimensions: '78 cm × 65.3 cm',
+    year: 1930,
+  },
+  {
+    id: '11',
+    title: 'The Birth of Venus',
+    artist: 'Sandro Botticelli',
+    description: 'A painting by the Italian artist Sandro Botticelli, probably made in the mid 1480s. It depicts the goddess Venus arriving at the shore after her birth, when she had emerged from the sea fully-grown.',
+    price: 92000000,
+    category: 'Renaissance',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/1280px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg',
+    medium: 'Tempera on Canvas',
+    dimensions: '172.5 cm × 278.9 cm',
+    year: 1486,
+  },
+  {
+    id: '12',
+    title: 'Les Demoiselles d\'Avignon',
+    artist: 'Pablo Picasso',
+    description: 'A large oil painting created in 1907 by the Spanish artist Pablo Picasso. The work portrays five nude female prostitutes from a brothel on Carrer d\'Avinyó in Barcelona.',
+    price: 105000000,
+    category: 'Cubism',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Les_Demoiselles_d%27Avignon.jpg/800px-Les_Demoiselles_d%27Avignon.jpg',
+    medium: 'Oil on Canvas',
+    dimensions: '243.9 cm × 233.7 cm',
+    year: 1907,
+  }
 ];

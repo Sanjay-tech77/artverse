@@ -38,12 +38,12 @@ export default function AboutPage() {
               </div>
               <div className="rounded-xl overflow-hidden shadow-lg">
                 <Image
-                  src="https://picsum.photos/seed/art-gallery-interior/800/600"
-                  alt="Inside ArtVerse Gallery"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Hubert_Robert_-_Projet_d%27am%C3%A9nagement_de_la_Grande_Galerie_du_Louvre_-_1796.jpg/800px-Hubert_Robert_-_Projet_d%27am%C3%A9nagement_de_la_Grande_Galerie_du_Louvre_-_1796.jpg"
+                  alt="Gallery of the Louvre by Hubert Robert"
                   width={800}
                   height={600}
                   className="w-full h-auto object-cover"
-                  data-ai-hint="art gallery" 
+                  data-ai-hint="louvre gallery" 
                 />
               </div>
             </div>

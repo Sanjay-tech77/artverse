@@ -9,7 +9,7 @@ import { HeroSection } from '@/components/hero-section';
 import { ArtworkFilters } from '@/components/artwork-filters';
 import { ArtworkShowcase } from '@/components/artwork-showcase';
 import { Skeleton } from '@/components/ui/skeleton';
-import Image from 'next/image'; // Added import for Image
+import Image from 'next/image'; 
 
 export default function HomePage() {
   const [allArtworks, setAllArtworks] = useState<Artwork[]>([]);
@@ -116,12 +116,12 @@ export default function HomePage() {
             </p>
             <div className="max-w-md mx-auto bg-card p-6 rounded-xl shadow-lg border">
               <Image 
-                src="https://picsum.photos/seed/leonardo-da-vinci-portrait/200/200" 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Francesco_Melzi_-_Portrait_of_Leonardo_da_Vinci.jpg/800px-Francesco_Melzi_-_Portrait_of_Leonardo_da_Vinci.jpg" 
                 alt="Leonardo da Vinci" 
                 width={200}
                 height={200}
                 className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-primary object-cover"
-                data-ai-hint="artist portrait"
+                data-ai-hint="davinci portrait"
               />
               <h3 className="text-xl font-semibold">Leonardo da Vinci</h3>
               <p className="text-muted-foreground text-sm">High Renaissance Master</p>

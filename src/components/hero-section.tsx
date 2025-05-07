@@ -7,12 +7,12 @@ export function HeroSection() {
     <section className="relative bg-secondary/30 py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 opacity-20">
         <Image 
-          src="https://picsum.photos/seed/hero-famous-painting/1920/1080" 
-          alt="Famous painting collage background" 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1920px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" 
+          alt="The Starry Night by Vincent van Gogh" 
           layout="fill" 
           objectFit="cover"
           priority
-          data-ai-hint="famous painting" // Updated hint
+          data-ai-hint="starry night" 
         />
       </div>
       <div className="container mx-auto px-4 relative z-10">
