@@ -19,6 +19,10 @@ export default function HomePage() {
     artist: 'all',
     sortBy: 'default',
   });
+  const [featuredArtistImageError, setFeaturedArtistImageError] = useState(false);
+
+  const featuredArtistOriginalImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Francesco_Melzi_-_Portrait_of_Leonardo_da_Vinci.jpg/800px-Francesco_Melzi_-_Portrait_of_Leonardo_da_Vinci.jpg";
+  const featuredArtistPlaceholderImageUrl = `https://picsum.photos/seed/davinci-featured/200/200`;
 
   useEffect(() => {
     // Simulate API call
@@ -116,11 +120,12 @@ export default function HomePage() {
             </p>
             <div className="max-w-md mx-auto bg-card p-6 rounded-xl shadow-lg border">
               <Image 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Francesco_Melzi_-_Portrait_of_Leonardo_da_Vinci.jpg/800px-Francesco_Melzi_-_Portrait_of_Leonardo_da_Vinci.jpg" 
+                src={featuredArtistImageError ? featuredArtistPlaceholderImageUrl : featuredArtistOriginalImageUrl} 
                 alt="Leonardo da Vinci" 
                 width={200}
                 height={200}
                 className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-primary object-cover"
+                onError={() => setFeaturedArtistImageError(true)}
                 data-ai-hint="davinci portrait"
               />
               <h3 className="text-xl font-semibold">Leonardo da Vinci</h3>

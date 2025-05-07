@@ -1,11 +1,18 @@
+'use client';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Users, Palette, Target, Lightbulb } from 'lucide-react';
+import { useState } from 'react';
 
 export default function AboutPage() {
+  const [galleryImageError, setGalleryImageError] = useState(false);
+
+  const galleryOriginalImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Hubert_Robert_-_Projet_d%27am%C3%A9nagement_de_la_Grande_Galerie_du_Louvre_-_1796.jpg/800px-Hubert_Robert_-_Projet_d%27am%C3%A9nagement_de_la_Grande_Galerie_du_Louvre_-_1796.jpg";
+  const galleryPlaceholderImageUrl = `https://picsum.photos/seed/louvre-about/800/600`;
+
   return (
     <>
       <Header />
@@ -38,11 +45,12 @@ export default function AboutPage() {
               </div>
               <div className="rounded-xl overflow-hidden shadow-lg">
                 <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Hubert_Robert_-_Projet_d%27am%C3%A9nagement_de_la_Grande_Galerie_du_Louvre_-_1796.jpg/800px-Hubert_Robert_-_Projet_d%27am%C3%A9nagement_de_la_Grande_Galerie_du_Louvre_-_1796.jpg"
+                  src={galleryImageError ? galleryPlaceholderImageUrl : galleryOriginalImageUrl}
                   alt="Gallery of the Louvre by Hubert Robert"
                   width={800}
                   height={600}
                   className="w-full h-auto object-cover"
+                  onError={() => setGalleryImageError(true)}
                   data-ai-hint="louvre gallery" 
                 />
               </div>

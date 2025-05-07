@@ -1,17 +1,25 @@
+'use client';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { useState } from 'react';
 
 export function HeroSection() {
+  const [heroImageError, setHeroImageError] = useState(false);
+
+  const heroOriginalImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1920px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg";
+  const heroPlaceholderImageUrl = `https://picsum.photos/seed/hero-fallback/1920/1080?grayscale&blur=2`;
+
   return (
     <section className="relative bg-secondary/30 py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 opacity-20">
         <Image 
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1920px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" 
+          src={heroImageError ? heroPlaceholderImageUrl : heroOriginalImageUrl} 
           alt="The Starry Night by Vincent van Gogh" 
           layout="fill" 
           objectFit="cover"
           priority
+          onError={() => setHeroImageError(true)}
           data-ai-hint="starry night" 
         />
       </div>

@@ -11,6 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { sampleArtworks } from '@/data/sample-artworks';
 import type { Artwork } from '@/types/artwork';
 import { User, Palette } from 'lucide-react';
+import { ArtistProfileImage } from '@/components/artist-profile-image';
 
 
 interface Artist {
@@ -25,14 +26,14 @@ interface Artist {
 const artistPortraits: Record<string, string> = {
   "Leonardo da Vinci": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Francesco_Melzi_-_Portrait_of_Leonardo_da_Vinci.jpg/800px-Francesco_Melzi_-_Portrait_of_Leonardo_da_Vinci.jpg",
   "Vincent van Gogh": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project.jpg/800px-Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project.jpg",
-  "Salvador Dalí": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Salvador_Dal%C3%AD_New_York_World-Telegram_and_Sun_1960_crop.jpg/800px-Salvador_Dal%C3%AD_New_York_World-Telegram_and_Sun_1960_crop.jpg", // More photo-like, but iconic
-  "Johannes Vermeer": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Johannes_Vermeer_-_The_Procuress_-_detail_-_Portrait_of_the_Artist.jpg/800px-Johannes_Vermeer_-_The_Procuress_-_detail_-_Portrait_of_the_Artist.jpg", // Self-portrait detail
+  "Salvador Dalí": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Salvador_Dal%C3%AD_New_York_World-Telegram_and_Sun_1960_crop.jpg/800px-Salvador_Dal%C3%AD_New_York_World-Telegram_and_Sun_1960_crop.jpg",
+  "Johannes Vermeer": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Johannes_Vermeer_-_The_Procuress_-_detail_-_Portrait_of_the_Artist.jpg/800px-Johannes_Vermeer_-_The_Procuress_-_detail_-_Portrait_of_the_Artist.jpg",
   "Edvard Munch": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Edvard_Munch_-_Self-Portrait_with_Brushes_-_Google_Art_Project.jpg/800px-Edvard_Munch_-_Self-Portrait_with_Brushes_-_Google_Art_Project.jpg",
-  "Pablo Picasso": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/800px-Pablo_picasso_1.jpg", // Photo, but well-known
+  "Pablo Picasso": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/800px-Pablo_picasso_1.jpg",
   "Rembrandt van Rijn": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Rembrandt_van_Rijn_-_Self-Portrait_-_Google_Art_Project.jpg/800px-Rembrandt_van_Rijn_-_Self-Portrait_-_Google_Art_Project.jpg",
-  "Claude Monet": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Claude_Monet_1899_Nadar_crop.jpg/800px-Claude_Monet_1899_Nadar_crop.jpg", // Photo
-  "Grant Wood": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Grant_Wood_age_39_in_1930.jpg/800px-Grant_Wood_age_39_in_1930.jpg", // Photo
-  "Sandro Botticelli": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Self-portrait_by_Sandro_Botticelli_close_up.jpg/800px-Self-portrait_by_Sandro_Botticelli_close_up.jpg" // Self-portrait detail
+  "Claude Monet": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Claude_Monet_1899_Nadar_crop.jpg/800px-Claude_Monet_1899_Nadar_crop.jpg",
+  "Grant Wood": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Grant_Wood_age_39_in_1930.jpg/800px-Grant_Wood_age_39_in_1930.jpg",
+  "Sandro Botticelli": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Self-portrait_by_Sandro_Botticelli_close_up.jpg/800px-Self-portrait_by_Sandro_Botticelli_close_up.jpg"
 };
 
 
@@ -56,7 +57,7 @@ export default function ArtistsPage() {
         name,
         specialty: Array.from(data.specialties).slice(0, 2).join(' & '), 
         bio: `A renowned ${name} known for ${Array.from(data.specialties).join(', ').toLowerCase()} masterpieces. ${name}'s work often explores themes of ${['humanity', 'mythology', 'nature', 'spirituality'][index % 4]} and the interplay of ${['light and shadow', 'form and space', 'emotion and technique', 'observation and imagination'][index % 4]}.`,
-        profileImageUrl: artistPortraits[name] || `https://picsum.photos/seed/${name.toLowerCase().replace(/\s+/g, '-')}-painting-portrait/400/400`,
+        profileImageUrl: artistPortraits[name] || `https://picsum.photos/seed/${name.toLowerCase().replace(/\s+/g, '-')}-profile/400/400`, // Ensure this provides a valid initial URL or handle if it can also fail
         artworksCount: data.artworks.length,
       }));
       
@@ -109,13 +110,13 @@ export default function ArtistsPage() {
                 {artists.map((artist) => (
                   <Card key={artist.name} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col h-full rounded-lg">
                     <CardHeader className="p-0 relative">
-                      <Image
+                       <ArtistProfileImage
                         src={artist.profileImageUrl}
                         alt={artist.name}
+                        fallbackSeed={`artist-${artist.name.toLowerCase().replace(/\s+/g, '-')}`}
+                        aiHint={`${artist.name.split(' ').pop()?.toLowerCase() || 'artist'} portrait`}
                         width={400}
                         height={400}
-                        className="w-full h-auto object-cover aspect-square"
-                        data-ai-hint={`${artist.name.split(' ').pop()?.toLowerCase() || 'artist'} portrait`}
                       />
                     </CardHeader>
                     <CardContent className="p-6 flex-grow flex flex-col">
@@ -162,3 +163,4 @@ export default function ArtistsPage() {
     </>
   );
 }
+
