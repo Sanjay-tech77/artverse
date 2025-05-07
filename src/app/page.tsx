@@ -9,6 +9,7 @@ import { HeroSection } from '@/components/hero-section';
 import { ArtworkFilters } from '@/components/artwork-filters';
 import { ArtworkShowcase } from '@/components/artwork-showcase';
 import { Skeleton } from '@/components/ui/skeleton';
+import Image from 'next/image'; // Added import for Image
 
 export default function HomePage() {
   const [allArtworks, setAllArtworks] = useState<Artwork[]>([]);
@@ -42,7 +43,7 @@ export default function HomePage() {
         artworksToDisplay.sort((a, b) => a.price - b.price);
         break;
       case 'price-desc':
-        artworksToDisplay.sort((a, b) => b.price - b.price);
+        artworksToDisplay.sort((a, b) => b.price - a.price);
         break;
       case 'title-asc':
         artworksToDisplay.sort((a, b) => a.title.localeCompare(b.title));
@@ -89,7 +90,7 @@ export default function HomePage() {
                 Explore Our Collection
               </h2>
               <p className="mt-4 text-lg text-muted-foreground">
-                Find artwork that speaks to you, from abstract wonders to realistic masterpieces.
+                Discover timeless masterpieces from renowned artists.
               </p>
             </div>
             <ArtworkFilters 
@@ -111,17 +112,19 @@ export default function HomePage() {
               Featured Artist
             </h2>
             <p className="mt-4 mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
-              This month, we spotlight Elena Voyager, whose cosmic-inspired pieces invite viewers to explore the universe within.
+              This month, we celebrate Leonardo da Vinci, a true Renaissance man whose genius spanned art, science, and invention.
             </p>
             <div className="max-w-md mx-auto bg-card p-6 rounded-xl shadow-lg border">
-              <img 
-                src="https://picsum.photos/seed/artistprofile/200/200" 
-                alt="Elena Voyager" 
-                className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-primary"
-                data-ai-hint="artist painting"
+              <Image 
+                src="https://picsum.photos/seed/leonardo-da-vinci-portrait/200/200" 
+                alt="Leonardo da Vinci" 
+                width={200}
+                height={200}
+                className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-primary object-cover"
+                data-ai-hint="artist portrait"
               />
-              <h3 className="text-xl font-semibold">Elena Voyager</h3>
-              <p className="text-muted-foreground text-sm">Abstract & Cosmic Artist</p>
+              <h3 className="text-xl font-semibold">Leonardo da Vinci</h3>
+              <p className="text-muted-foreground text-sm">High Renaissance Master</p>
             </div>
           </div>
         </section>

@@ -6,7 +6,7 @@ import { useCart } from '@/context/cart-context';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Trash2, Plus, Minus } from 'lucide-react';
-import { generateArtworkImageHint } from '@/lib/utils';
+import { generateFamousPaintingHint } from '@/lib/utils'; // Changed import
 
 interface CartItemDisplayProps {
   item: CartItem;
@@ -32,7 +32,7 @@ export function CartItemDisplay({ item }: CartItemDisplayProps) {
           fill
           sizes="80px"
           className="object-cover"
-          data-ai-hint={generateArtworkImageHint(item.category, item.medium)}
+          data-ai-hint={generateFamousPaintingHint(item.title)} // Updated hint generation
         />
       </div>
       <div className="flex-grow">

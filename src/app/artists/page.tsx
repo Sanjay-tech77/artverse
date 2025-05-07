@@ -15,7 +15,7 @@ import { User, Palette } from 'lucide-react';
 
 interface Artist {
   name: string;
-  specialty: string; // e.g., Abstract, Digital Art
+  specialty: string; 
   bio: string;
   profileImageUrl: string;
   artworksCount: number;
@@ -26,9 +26,6 @@ export default function ArtistsPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate API call to fetch artists
-    // In a real app, this would be an API call.
-    // For now, we derive artists from sampleArtworks
     setTimeout(() => {
       const artistMap = new Map<string, { artworks: Artwork[], specialties: Set<string> }>();
 
@@ -42,15 +39,15 @@ export default function ArtistsPage() {
 
       const fetchedArtists: Artist[] = Array.from(artistMap.entries()).map(([name, data], index) => ({
         name,
-        specialty: Array.from(data.specialties).slice(0, 2).join(' & '), // Show up to 2 specialties
-        bio: `An acclaimed artist known for ${Array.from(data.specialties).join(', ').toLowerCase()} pieces. ${name} explores themes of ${['nature', 'urban life', 'emotion', 'technology'][index % 4]} and ${['light', 'form', 'color', 'texture'][index % 4]}.`,
-        profileImageUrl: `https://picsum.photos/seed/${name.toLowerCase().replace(/\s+/g, '-')}/400/400`,
+        specialty: Array.from(data.specialties).slice(0, 2).join(' & '), 
+        bio: `A renowned ${name} known for ${Array.from(data.specialties).join(', ').toLowerCase()} masterpieces. ${name}'s work often explores themes of ${['humanity', 'mythology', 'nature', 'spirituality'][index % 4]} and the interplay of ${['light and shadow', 'form and space', 'emotion and technique', 'observation and imagination'][index % 4]}.`,
+        profileImageUrl: `https://picsum.photos/seed/${name.toLowerCase().replace(/\s+/g, '-')}-profile/400/400`,
         artworksCount: data.artworks.length,
       }));
       
       setArtists(fetchedArtists);
       setIsLoading(false);
-    }, 700); // Simulate network delay
+    }, 700); 
   }, []);
 
   const ArtistSkeleton = () => (
@@ -76,10 +73,10 @@ export default function ArtistsPage() {
         <section className="py-16 md:py-24 lg:py-32 bg-primary/10">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-foreground">
-              Meet Our Talented Artists
+              Meet Our Featured Artists
             </h1>
             <p className="mt-6 text-lg text-foreground/80 sm:text-xl max-w-3xl mx-auto">
-              Discover the creative minds behind the masterpieces. Each artist brings a unique perspective and style to ArtVerse Gallery.
+              Discover the legendary figures behind timeless masterpieces. Each artist brings a unique vision that shaped art history.
             </p>
           </div>
         </section>
@@ -103,7 +100,7 @@ export default function ArtistsPage() {
                         width={400}
                         height={400}
                         className="w-full h-auto object-cover aspect-square"
-                        data-ai-hint="artist painting"
+                        data-ai-hint="artist portrait" // Updated hint
                       />
                     </CardHeader>
                     <CardContent className="p-6 flex-grow flex flex-col">
@@ -115,9 +112,9 @@ export default function ArtistsPage() {
                         {artist.bio}
                       </CardDescription>
                       <div className="flex justify-between items-center text-sm text-foreground/90">
-                         <span className="font-medium">{artist.artworksCount} Artworks</span>
+                         <span className="font-medium">{artist.artworksCount} Masterpiece{artist.artworksCount === 1 ? '' : 's'}</span>
                          <Button variant="outline" size="sm" asChild>
-                           <Link href={`/?artist=${encodeURIComponent(artist.name)}#gallery`}>View Profile</Link>
+                           <Link href={`/?artist=${encodeURIComponent(artist.name)}#gallery`}>View Works</Link>
                          </Button>
                       </div>
                     </CardContent>
@@ -134,13 +131,13 @@ export default function ArtistsPage() {
           <div className="container mx-auto px-4 text-center">
             <User className="h-16 w-16 text-accent mx-auto mb-6" />
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
-              Are You an Artist?
+              Share Your Artistic Vision
             </h2>
             <p className="mt-4 mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
-              We are always looking for fresh talent to join our gallery. If you believe your art aligns with our vision, we'd love to hear from you.
+              ArtVerse Gallery is a platform for exceptional art. If you are an artist with a unique voice, we invite you to connect with us.
             </p>
             <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
-              <Link href="mailto:submissions@artversegallery.example.com">Submit Your Portfolio</Link>
+              <Link href="mailto:submissions@artversegallery.example.com">Artist Submissions</Link>
             </Button>
           </div>
         </section>
