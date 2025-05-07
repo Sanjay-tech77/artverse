@@ -19,7 +19,7 @@ import { ThemeToggleButton } from '@/components/theme-toggle-button';
 const NavLinks = ({ isMobile = false }: { isMobile?: boolean }) => {
   const commonLinkClass = "text-sm font-medium text-foreground/80 hover:text-foreground transition-colors";
   // Consistent styling for all mobile links including padding and flex alignment
-  const mobileLinkStyles = "block py-2 px-3 rounded-md hover:bg-accent flex items-center";
+  const mobileLinkStyles = "block py-2 rounded-md hover:bg-accent flex items-center";
 
   const LinkWrapper = isMobile ? SheetClose : React.Fragment;
 
@@ -49,9 +49,9 @@ const NavLinks = ({ isMobile = false }: { isMobile?: boolean }) => {
               {isMobile ? (
                 // Mobile: Render Icon or a Spacer for alignment
                 IconComponent ? (
-                  <IconComponent className="mr-2 h-4 w-4 flex-shrink-0" />
+                  <IconComponent className="h-4 w-4 flex-shrink-0" />
                 ) : (
-                  <span className="mr-2 h-4 w-4 flex-shrink-0"></span> // Spacer to align text
+                  <span className="h-4 w-4 flex-shrink-0"></span> // Spacer to align text
                 )
               ) : (
                 // Desktop: Render Icon if available, no spacer needed for non-icon links
@@ -73,7 +73,7 @@ export function Header() {
 
   const commonMobileLinkClass = "text-sm font-medium text-foreground/80 hover:text-foreground transition-colors";
   // This class should match the `mobileLinkStyles` in NavLinks for consistency
-  const mobileCartLinkClass = "block py-2 px-3 rounded-md hover:bg-accent flex items-center";
+  const mobileCartLinkClass = "block py-2 px-4 rounded-md hover:bg-accent flex items-center";
 
 
   return (
@@ -117,7 +117,7 @@ export function Header() {
                       href="/checkout"
                       className={`${commonMobileLinkClass} ${mobileCartLinkClass}`}
                     >
-                      <ShoppingCart className="mr-2 h-4 w-4 flex-shrink-0" />
+                     
                       <span>Cart {itemCount > 0 && `(${itemCount > 9 ? '9+' : itemCount})`}</span>
                     </Link>
                   </SheetClose>
