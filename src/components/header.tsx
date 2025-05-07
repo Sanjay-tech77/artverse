@@ -41,8 +41,8 @@ const NavLinks = ({ isMobile = false }: { isMobile?: boolean }) => {
 
 
 export function Header() {
-  const { getItemCount } = useCart();
-  const itemCount = getItemCount();
+  const { cartItems } = useCart();
+  const itemCount = cartItems.reduce((count, item) => count + item.quantity, 0);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -58,10 +58,10 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="icon" aria-label="Shopping Cart" asChild>
-            <Link href="/checkout">
+            <Link href="/checkout" className="relative"> {/* Added relative for badge positioning */}
               <ShoppingCart className="h-5 w-5" />
               {itemCount > 0 && (
-                <Badge variant="destructive" className="absolute top-1 right-1 h-5 w-5 p-0 flex items-center justify-center text-xs">
+                <Badge variant="destructive" className="absolute top-[-0.3rem] right-[-0.3rem] h-5 w-5 p-0 flex items-center justify-center text-xs rounded-full">
                   {itemCount}
                 </Badge>
               )}
@@ -89,3 +89,4 @@ export function Header() {
     </header>
   );
 }
+
