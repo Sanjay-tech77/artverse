@@ -1,8 +1,11 @@
+'use client'; 
 import Link from 'next/link';
 import { Palette, ShoppingCart, Menu, Info, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import React from 'react'; // Added import for React
+import React from 'react';
+import { useCart } from '@/context/cart-context';
+import { Badge } from '@/components/ui/badge';
 
 const NavLinks = ({ isMobile = false }: { isMobile?: boolean }) => {
   const commonLinkClass = "text-sm font-medium text-foreground/80 hover:text-foreground transition-colors";
@@ -38,6 +41,9 @@ const NavLinks = ({ isMobile = false }: { isMobile?: boolean }) => {
 
 
 export function Header() {
+  const { getItemCount } = useCart();
+  const itemCount = getItemCount();
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -51,8 +57,15 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" aria-label="Shopping Cart">
-            <ShoppingCart className="h-5 w-5" />
+          <Button variant="ghost" size="icon" aria-label="Shopping Cart" asChild>
+            <Link href="/checkout">
+              <ShoppingCart className="h-5 w-5" />
+              {itemCount > 0 && (
+                <Badge variant="destructive" className="absolute top-1 right-1 h-5 w-5 p-0 flex items-center justify-center text-xs">
+                  {itemCount}
+                </Badge>
+              )}
+            </Link>
           </Button>
           <Sheet>
             <SheetTrigger asChild className="md:hidden">
@@ -63,6 +76,11 @@ export function Header() {
             <SheetContent side="right">
               <nav className="flex flex-col space-y-1 pt-6">
                 <NavLinks isMobile={true} />
+                 <SheetClose asChild>
+                    <Link href="/checkout" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors block py-2">
+                      <ShoppingCart className="inline-block mr-1 h-4 w-4" /> Cart {itemCount > 0 && `(${itemCount})`}
+                    </Link>
+                  </SheetClose>
               </nav>
             </SheetContent>
           </Sheet>
@@ -71,4 +89,3 @@ export function Header() {
     </header>
   );
 }
-

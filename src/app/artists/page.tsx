@@ -117,7 +117,7 @@ export default function ArtistsPage() {
                       <div className="flex justify-between items-center text-sm text-foreground/90">
                          <span className="font-medium">{artist.artworksCount} Artworks</span>
                          <Button variant="outline" size="sm" asChild>
-                           <Link href={`/#gallery?artist=${encodeURIComponent(artist.name)}`}>View Profile</Link>
+                           <Link href={`/?artist=${encodeURIComponent(artist.name)}#gallery`}>View Profile</Link>
                          </Button>
                       </div>
                     </CardContent>
@@ -139,8 +139,8 @@ export default function ArtistsPage() {
             <p className="mt-4 mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
               We are always looking for fresh talent to join our gallery. If you believe your art aligns with our vision, we'd love to hear from you.
             </p>
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-              <Link href="#">Submit Your Portfolio</Link>
+            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
+              <Link href="mailto:submissions@artversegallery.example.com">Submit Your Portfolio</Link>
             </Button>
           </div>
         </section>

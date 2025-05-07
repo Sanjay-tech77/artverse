@@ -87,7 +87,7 @@ export default function AboutPage() {
                 <Link href="/artists">Meet Our Artists</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="#">Contact Us</Link>
+                <Link href="mailto:contact@artversegallery.example.com">Contact Us</Link>
               </Button>
             </div>
           </div>

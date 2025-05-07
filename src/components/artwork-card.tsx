@@ -1,24 +1,32 @@
+'use client';
 import Image from 'next/image';
 import type { Artwork } from '@/types/artwork';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Eye, ShoppingCart } from 'lucide-react';
+import { useCart } from '@/context/cart-context';
 
 interface ArtworkCardProps {
   artwork: Artwork;
 }
 
 export function ArtworkCard({ artwork }: ArtworkCardProps) {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart(artwork);
+  };
+
   return (
-    <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col h-full rounded-lg">
+    <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col h-full rounded-lg group">
       <CardHeader className="p-0">
-        <div className="aspect-[3/4] relative w-full">
+        <div className="aspect-[3/4] relative w-full overflow-hidden">
           <Image
             src={artwork.imageUrl}
             alt={artwork.title}
-            layout="fill"
-            objectFit="cover"
-            className="transition-transform duration-300 group-hover:scale-105"
+            fill // Changed from layout="fill" objectFit="cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
             data-ai-hint={`${artwork.category} ${artwork.medium}`}
           />
         </div>
@@ -38,7 +46,7 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
           <Eye className="mr-2 h-4 w-4" />
           View Details
         </Button>
-        <Button size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+        <Button size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground" onClick={handleAddToCart}>
           <ShoppingCart className="mr-2 h-4 w-4" />
           Add to Cart
         </Button>
