@@ -44,26 +44,26 @@ export default function RootLayout({
   }, []);
 
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth"> {/* Added scroll-smooth */}
-      <head>
-        {/* Title and meta description can be added here directly or via a Head component if dynamic changes are needed from client side */}
-        <title>ArtVerse Gallery</title>
-        <meta name="description" content="Discover and purchase unique artwork and paintings from talented artists." />
-      </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
-        {isLoading && <GlobalLoader />}
-        <ThemeProvider
-          // attribute="class" // Managed internally by ThemeProvider
-          // defaultTheme="system" // Managed internally by ThemeProvider
-          // enableSystem // Managed internally by ThemeProvider
-          // disableTransitionOnChange // Managed internally by ThemeProvider
-        >
-          <CartProvider>
-            {!isLoading && children} {/* Render children only after initial load */}
-            <Toaster />
-          </CartProvider>
-        </ThemeProvider>
-      </body>
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <head>
+      {/* Title and meta description can be added here directly or via a Head component if dynamic changes are needed from client side */}
+      <title>ArtVerse Gallery</title>
+      <meta name="description" content="Discover and purchase unique artwork and paintings from talented artists." />
+    </head>
+    <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
+      {isLoading && <GlobalLoader />}
+      <ThemeProvider
+        // attribute="class" // Managed internally by ThemeProvider
+        // defaultTheme="system" // Managed internally by ThemeProvider
+        // enableSystem // Managed internally by ThemeProvider
+        // disableTransitionOnChange // Managed internally by ThemeProvider
+      >
+        <CartProvider>
+          {!isLoading && children} {/* Render children only after initial load */}
+          <Toaster />
+        </CartProvider>
+      </ThemeProvider>
+    </body>
     </html>
   );
 }
