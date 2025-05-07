@@ -6,6 +6,7 @@ import { useCart } from '@/context/cart-context';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Trash2, Plus, Minus } from 'lucide-react';
+import { generateArtworkImageHint } from '@/lib/utils';
 
 interface CartItemDisplayProps {
   item: CartItem;
@@ -31,7 +32,7 @@ export function CartItemDisplay({ item }: CartItemDisplayProps) {
           fill
           sizes="80px"
           className="object-cover"
-          data-ai-hint="artwork small"
+          data-ai-hint={generateArtworkImageHint(item.category, item.medium)}
         />
       </div>
       <div className="flex-grow">

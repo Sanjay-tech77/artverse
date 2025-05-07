@@ -42,7 +42,7 @@ export default function HomePage() {
         artworksToDisplay.sort((a, b) => a.price - b.price);
         break;
       case 'price-desc':
-        artworksToDisplay.sort((a, b) => b.price - a.price);
+        artworksToDisplay.sort((a, b) => b.price - b.price);
         break;
       case 'title-asc':
         artworksToDisplay.sort((a, b) => a.title.localeCompare(b.title));
@@ -118,7 +118,7 @@ export default function HomePage() {
                 src="https://picsum.photos/seed/artistprofile/200/200" 
                 alt="Elena Voyager" 
                 className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-primary"
-                data-ai-hint="artist portrait"
+                data-ai-hint="artist painting"
               />
               <h3 className="text-xl font-semibold">Elena Voyager</h3>
               <p className="text-muted-foreground text-sm">Abstract & Cosmic Artist</p>

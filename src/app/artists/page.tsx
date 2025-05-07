@@ -103,7 +103,7 @@ export default function ArtistsPage() {
                         width={400}
                         height={400}
                         className="w-full h-auto object-cover aspect-square"
-                        data-ai-hint="artist portrait"
+                        data-ai-hint="artist painting"
                       />
                     </CardHeader>
                     <CardContent className="p-6 flex-grow flex flex-col">

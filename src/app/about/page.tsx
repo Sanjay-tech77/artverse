@@ -43,7 +43,7 @@ export default function AboutPage() {
                   width={800}
                   height={600}
                   className="w-full h-auto object-cover"
-                  data-ai-hint="art gallery interior"
+                  data-ai-hint="gallery painting"
                 />
               </div>
             </div>

@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription }
 import { Button } from '@/components/ui/button';
 import { Eye, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/context/cart-context';
+import { generateArtworkImageHint } from '@/lib/utils';
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -27,7 +28,7 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
             fill // Changed from layout="fill" objectFit="cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
-            data-ai-hint={`${artwork.category} ${artwork.medium}`}
+            data-ai-hint={generateArtworkImageHint(artwork.category, artwork.medium)}
           />
         </div>
       </CardHeader>
