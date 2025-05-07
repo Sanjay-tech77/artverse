@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
@@ -9,6 +10,27 @@ import { HeroSection } from '@/components/hero-section';
 import { ArtworkFilters } from '@/components/artwork-filters';
 import { ArtworkShowcase } from '@/components/artwork-showcase';
 import { Skeleton } from '@/components/ui/skeleton';
+import dynamic from 'next/dynamic';
+
+const FeaturedArtistSection = dynamic(() => 
+  import('@/components/featured-artist-section').then(mod => mod.FeaturedArtistSection),
+  { 
+    loading: () => (
+      <div className="py-12 md:py-16 lg:py-20 bg-secondary/30">
+        <div className="container mx-auto px-4 text-center">
+          <Skeleton className="h-10 w-3/4 mx-auto mb-4" />
+          <Skeleton className="h-6 w-1/2 mx-auto mb-8" />
+          <div className="max-w-md mx-auto bg-card p-6 rounded-xl shadow-lg border">
+            <Skeleton className="w-32 h-32 rounded-full mx-auto mb-4" />
+            <Skeleton className="h-6 w-1/2 mx-auto mb-2" />
+            <Skeleton className="h-4 w-1/3 mx-auto" />
+          </div>
+        </div>
+      </div>
+    ),
+    ssr: false 
+  }
+);
 
 export default function HomePage() {
   const [allArtworks, setAllArtworks] = useState<Artwork[]>([]);
@@ -18,13 +40,18 @@ export default function HomePage() {
     artist: 'all',
     sortBy: 'default',
   });
+  
 
   useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+    const timer = setTimeout(() => {
       setAllArtworks(sampleArtworks);
       setIsLoading(false);
-    }, 500); // Simulate network delay
+    }, 500); 
+    
+    return () => clearTimeout(timer);
   }, []);
 
   const filteredAndSortedArtworks = useMemo(() => {
@@ -51,7 +78,6 @@ export default function HomePage() {
         artworksToDisplay.sort((a, b) => a.artist.localeCompare(b.artist));
         break;
       default:
-        // Default sort or keep original order from sampleArtworks
         break;
     }
     return artworksToDisplay;
@@ -89,7 +115,7 @@ export default function HomePage() {
                 Explore Our Collection
               </h2>
               <p className="mt-4 text-lg text-muted-foreground">
-                Find artwork that speaks to you, from abstract wonders to realistic masterpieces.
+                Discover timeless masterpieces from renowned artists.
               </p>
             </div>
             <ArtworkFilters 
@@ -105,26 +131,7 @@ export default function HomePage() {
           </div>
         </section>
         
-        <section className="py-12 md:py-16 lg:py-20 bg-secondary/30">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
-              Featured Artist
-            </h2>
-            <p className="mt-4 mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
-              This month, we spotlight Elena Voyager, whose cosmic-inspired pieces invite viewers to explore the universe within.
-            </p>
-            <div className="max-w-md mx-auto bg-card p-6 rounded-xl shadow-lg border">
-              <img 
-                src="https://picsum.photos/seed/artistprofile/200/200" 
-                alt="Elena Voyager" 
-                className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-primary"
-                data-ai-hint="artist portrait"
-              />
-              <h3 className="text-xl font-semibold">Elena Voyager</h3>
-              <p className="text-muted-foreground text-sm">Abstract & Cosmic Artist</p>
-            </div>
-          </div>
-        </section>
+        <FeaturedArtistSection />
       </main>
       <Footer />
     </>

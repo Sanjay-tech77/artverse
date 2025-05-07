@@ -6,6 +6,8 @@ import { useCart } from '@/context/cart-context';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Trash2, Plus, Minus } from 'lucide-react';
+import { generateFamousPaintingHint } from '@/lib/utils';
+import { useState } from 'react';
 
 interface CartItemDisplayProps {
   item: CartItem;
@@ -13,6 +15,7 @@ interface CartItemDisplayProps {
 
 export function CartItemDisplay({ item }: CartItemDisplayProps) {
   const { updateQuantity, removeFromCart } = useCart();
+  const [imageError, setImageError] = useState(false);
 
   const handleQuantityChange = (newQuantity: number) => {
     updateQuantity(item.id, newQuantity);
@@ -22,16 +25,19 @@ export function CartItemDisplay({ item }: CartItemDisplayProps) {
     removeFromCart(item.id);
   };
 
+  const placeholderImageUrl = `https://picsum.photos/seed/cart-${item.id}/80/96`;
+
   return (
     <div className="flex items-center gap-4 py-4 border-b">
       <div className="relative h-24 w-20 rounded-md overflow-hidden">
         <Image
-          src={item.imageUrl}
+          src={imageError ? placeholderImageUrl : item.imageUrl}
           alt={item.title}
           fill
           sizes="80px"
           className="object-cover"
-          data-ai-hint="artwork small"
+          onError={() => setImageError(true)}
+          data-ai-hint={generateFamousPaintingHint(item.title)}
         />
       </div>
       <div className="flex-grow">

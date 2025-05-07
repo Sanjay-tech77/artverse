@@ -5,6 +5,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription }
 import { Button } from '@/components/ui/button';
 import { Eye, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/context/cart-context';
+import { generateFamousPaintingHint } from '@/lib/utils';
+import { useState } from 'react';
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -12,22 +14,26 @@ interface ArtworkCardProps {
 
 export function ArtworkCard({ artwork }: ArtworkCardProps) {
   const { addToCart } = useCart();
+  const [imageError, setImageError] = useState(false);
 
   const handleAddToCart = () => {
     addToCart(artwork);
   };
+
+  const placeholderImageUrl = `https://picsum.photos/seed/${artwork.id}/300/400`;
 
   return (
     <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col h-full rounded-lg group">
       <CardHeader className="p-0">
         <div className="aspect-[3/4] relative w-full overflow-hidden">
           <Image
-            src={artwork.imageUrl}
+            src={imageError ? placeholderImageUrl : artwork.imageUrl}
             alt={artwork.title}
-            fill // Changed from layout="fill" objectFit="cover"
+            fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
-            data-ai-hint={`${artwork.category} ${artwork.medium}`}
+            onError={() => setImageError(true)}
+            data-ai-hint={generateFamousPaintingHint(artwork.title)}
           />
         </div>
       </CardHeader>
