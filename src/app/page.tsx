@@ -25,11 +25,18 @@ export default function HomePage() {
   const featuredArtistPlaceholderImageUrl = `https://picsum.photos/seed/davinci-featured/200/200`;
 
   useEffect(() => {
+    // Ensure the page scrolls to the top on initial load or reload.
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
     // Simulate API call
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setAllArtworks(sampleArtworks);
       setIsLoading(false);
     }, 500); // Simulate network delay
+    
+    return () => clearTimeout(timer); // Cleanup timeout
   }, []);
 
   const filteredAndSortedArtworks = useMemo(() => {
