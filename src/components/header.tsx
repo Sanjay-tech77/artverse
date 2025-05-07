@@ -1,7 +1,7 @@
 
 'use client';
 import Link from 'next/link';
-import { Palette, ShoppingCart, Menu, Info, Users } from 'lucide-react';
+import { Palette, ShoppingCart, Menu } from 'lucide-react'; // Removed Info, Users
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -26,8 +26,8 @@ const NavLinks = ({ isMobile = false }: { isMobile?: boolean }) => {
   const linksConfig = [
     { href: "/", label: "Home", icon: null, id: "home" },
     { href: "/#gallery", label: "Gallery", icon: null, id: "gallery" },
-    { href: "/artists", label: "Artists", icon: Users, id: "artists" },
-    { href: "/about", label: "About", icon: Info, id: "about" },
+    { href: "/artists", label: "Artists", icon: null, id: "artists" }, // Icon set to null
+    { href: "/about", label: "About", icon: null, id: "about" },     // Icon set to null
   ];
 
   return (
@@ -129,3 +129,4 @@ export function Header() {
     </header>
   );
 }
+
