@@ -1,24 +1,41 @@
 import Link from 'next/link';
-import { Palette, ShoppingCart, Menu } from 'lucide-react';
+import { Palette, ShoppingCart, Menu, Info, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import React from 'react'; // Added import for React
 
-const NavLinks = () => (
-  <>
-    <Link href="/" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
-      Home
-    </Link>
-    <Link href="#gallery" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
-      Gallery
-    </Link>
-    <Link href="#" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
-      Artists
-    </Link>
-    <Link href="#" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
-      About
-    </Link>
-  </>
-);
+const NavLinks = ({ isMobile = false }: { isMobile?: boolean }) => {
+  const commonLinkClass = "text-sm font-medium text-foreground/80 hover:text-foreground transition-colors";
+  const mobileLinkClass = "block py-2";
+
+  const LinkWrapper = isMobile ? SheetClose : React.Fragment;
+
+  return (
+    <>
+      <LinkWrapper>
+        <Link href="/" className={`${commonLinkClass} ${isMobile ? mobileLinkClass : ''}`}>
+          Home
+        </Link>
+      </LinkWrapper>
+      <LinkWrapper>
+        <Link href="/#gallery" className={`${commonLinkClass} ${isMobile ? mobileLinkClass : ''}`}>
+          Gallery
+        </Link>
+      </LinkWrapper>
+      <LinkWrapper>
+        <Link href="/artists" className={`${commonLinkClass} ${isMobile ? mobileLinkClass : ''}`}>
+          <Users className="inline-block mr-1 h-4 w-4" /> Artists
+        </Link>
+      </LinkWrapper>
+      <LinkWrapper>
+        <Link href="/about" className={`${commonLinkClass} ${isMobile ? mobileLinkClass : ''}`}>
+          <Info className="inline-block mr-1 h-4 w-4" /> About
+        </Link>
+      </LinkWrapper>
+    </>
+  );
+};
+
 
 export function Header() {
   return (
@@ -44,8 +61,8 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
-              <nav className="flex flex-col space-y-4 pt-6">
-                <NavLinks />
+              <nav className="flex flex-col space-y-1 pt-6">
+                <NavLinks isMobile={true} />
               </nav>
             </SheetContent>
           </Sheet>
@@ -54,3 +71,4 @@ export function Header() {
     </header>
   );
 }
+
