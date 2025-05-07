@@ -6,7 +6,7 @@ import type { CartItem } from '@/types/cart';
 import { useCart } from '@/context/cart-context';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Trash2, Plus, Minus } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react'; // Removed Trash2
 import { generateFamousPaintingHint } from '@/lib/utils';
 import { useState } from 'react';
 
@@ -27,18 +27,20 @@ export function CartItemDisplay({ item }: CartItemDisplayProps) {
     removeFromCart(item.id);
   };
 
-  const placeholderImageUrl = `https://picsum.photos/seed/cart-${item.id}/80/96`;
+  // Updated placeholder dimensions: w-24 (96px), h-28 (112px)
+  const placeholderImageUrl = `https://picsum.photos/seed/cart-${item.id}/96/112`;
 
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 py-4 border-b last:border-b-0">
       {/* Group 1: Image and Info */}
       <div className="flex flex-col items-center w-full sm:flex-row sm:items-center gap-3 sm:gap-4 sm:flex-1">
-        <div className="relative h-24 w-20 rounded-md overflow-hidden flex-shrink-0">
+        {/* Increased image container size */}
+        <div className="relative h-28 w-24 rounded-md overflow-hidden flex-shrink-0">
           <Image
             src={imageError ? placeholderImageUrl : item.imageUrl}
             alt={item.title}
             fill
-            sizes="80px"
+            sizes="96px" // Updated sizes prop to match new width
             className="object-cover"
             onError={() => setImageError(true)}
             data-ai-hint={generateFamousPaintingHint(item.title)}
@@ -58,7 +60,7 @@ export function CartItemDisplay({ item }: CartItemDisplayProps) {
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8 flex-shrink-0" // Added flex-shrink-0
+            className="h-8 w-8 flex-shrink-0"
             onClick={() => handleQuantityChange(item.quantity - 1)}
             disabled={item.quantity <= 1}
             aria-label="Decrease quantity"
@@ -69,14 +71,14 @@ export function CartItemDisplay({ item }: CartItemDisplayProps) {
             type="number"
             value={item.quantity}
             onChange={(e) => handleQuantityChange(e.target.valueAsNumber)}
-            className="h-8 w-12 text-center px-1 flex-shrink-0" // Added flex-shrink-0
+            className="h-8 w-12 text-center px-1 flex-shrink-0"
             min="1"
             aria-label="Item quantity"
           />
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8 flex-shrink-0" // Added flex-shrink-0
+            className="h-8 w-8 flex-shrink-0"
             onClick={() => handleQuantityChange(item.quantity + 1)}
             aria-label="Increase quantity"
           >
@@ -85,13 +87,19 @@ export function CartItemDisplay({ item }: CartItemDisplayProps) {
         </div>
 
         {/* Subtotal */}
-        <div className="text-md font-semibold min-w-[70px] text-center sm:text-right flex-shrink-0"> {/* Added flex-shrink-0 */}
+        <div className="text-md font-semibold min-w-[70px] text-center sm:text-right flex-shrink-0">
           ${(item.price * item.quantity).toFixed(2)}
         </div>
 
-        {/* Remove Button */}
-        <Button variant="ghost" size="icon" onClick={handleRemove} className="text-destructive hover:text-destructive/80 flex-shrink-0"> {/* Added flex-shrink-0 */}
-          <Trash2 className="h-5 w-5" />
+        {/* Remove Button - Changed from icon to text button */}
+        <Button
+          variant="destructive"
+          size="sm"
+          onClick={handleRemove}
+          className="flex-shrink-0"
+          aria-label={`Remove ${item.title} from cart`}
+        >
+          Remove
         </Button>
       </div>
     </div>
