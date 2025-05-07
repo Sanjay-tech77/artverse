@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -12,7 +13,24 @@ import { sampleArtworks } from '@/data/sample-artworks';
 import type { Artwork } from '@/types/artwork';
 import { User, Palette } from 'lucide-react';
 import { ArtistProfileImage } from '@/components/artist-profile-image';
+import dynamic from 'next/dynamic';
 
+const ArtistSubmissionSection = dynamic(() =>
+  import('@/components/artist-submission-section').then(mod => mod.ArtistSubmissionSection),
+  {
+    loading: () => (
+      <div className="py-12 md:py-16 lg:py-20 bg-secondary/30">
+        <div className="container mx-auto px-4 text-center">
+          <Skeleton className="h-16 w-16 rounded-full mx-auto mb-6" />
+          <Skeleton className="h-10 w-3/4 mx-auto mb-4" />
+          <Skeleton className="h-6 w-1/2 mx-auto mb-8" />
+          <Skeleton className="h-12 w-48 mx-auto" />
+        </div>
+      </div>
+    ),
+    ssr: false
+  }
+);
 
 interface Artist {
   name: string;
@@ -22,7 +40,6 @@ interface Artist {
   artworksCount: number;
 }
 
-// Specific portrait URLs for artists if available, otherwise fallback
 const artistPortraits: Record<string, string> = {
   "Leonardo da Vinci": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Francesco_Melzi_-_Portrait_of_Leonardo_da_Vinci.jpg/800px-Francesco_Melzi_-_Portrait_of_Leonardo_da_Vinci.jpg",
   "Vincent van Gogh": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project.jpg/800px-Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project.jpg",
@@ -57,7 +74,7 @@ export default function ArtistsPage() {
         name,
         specialty: Array.from(data.specialties).slice(0, 2).join(' & '), 
         bio: `A renowned ${name} known for ${Array.from(data.specialties).join(', ').toLowerCase()} masterpieces. ${name}'s work often explores themes of ${['humanity', 'mythology', 'nature', 'spirituality'][index % 4]} and the interplay of ${['light and shadow', 'form and space', 'emotion and technique', 'observation and imagination'][index % 4]}.`,
-        profileImageUrl: artistPortraits[name] || `https://picsum.photos/seed/${name.toLowerCase().replace(/\s+/g, '-')}-profile/400/400`, // Ensure this provides a valid initial URL or handle if it can also fail
+        profileImageUrl: artistPortraits[name] || `https://picsum.photos/seed/${name.toLowerCase().replace(/\s+/g, '-')}-profile/400/400`,
         artworksCount: data.artworks.length,
       }));
       
@@ -143,24 +160,10 @@ export default function ArtistsPage() {
           </div>
         </section>
         
-        <section className="py-12 md:py-16 lg:py-20 bg-secondary/30">
-          <div className="container mx-auto px-4 text-center">
-            <User className="h-16 w-16 text-accent mx-auto mb-6" />
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
-              Share Your Artistic Vision
-            </h2>
-            <p className="mt-4 mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
-              ArtVerse Gallery is a platform for exceptional art. If you are an artist with a unique voice, we invite you to connect with us.
-            </p>
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
-              <Link href="mailto:submissions@artversegallery.example.com">Artist Submissions</Link>
-            </Button>
-          </div>
-        </section>
+        <ArtistSubmissionSection />
 
       </main>
       <Footer />
     </>
   );
 }
-

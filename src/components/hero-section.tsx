@@ -1,3 +1,4 @@
+
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -16,9 +17,9 @@ export function HeroSection() {
         <Image 
           src={heroImageError ? heroPlaceholderImageUrl : heroOriginalImageUrl} 
           alt="The Starry Night by Vincent van Gogh" 
-          layout="fill" 
-          objectFit="cover"
-          priority
+          fill 
+          className="object-cover"
+          priority // Added priority for LCP
           onError={() => setHeroImageError(true)}
           data-ai-hint="starry night" 
         />
