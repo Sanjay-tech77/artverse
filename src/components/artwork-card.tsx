@@ -7,6 +7,7 @@ import { Eye, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/context/cart-context';
 import { generateFamousPaintingHint } from '@/lib/utils';
 import { useState } from 'react';
+import Link from 'next/link';
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -48,9 +49,11 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
         </div>
       </CardContent>
       <CardFooter className="p-4 pt-0 flex justify-between items-center">
-        <Button variant="outline" size="sm">
-          <Eye className="mr-2 h-4 w-4" />
-          View Details
+        <Button variant="outline" size="sm" asChild>
+          <Link href={`/artwork/${artwork.id}`}>
+            <Eye className="mr-2 h-4 w-4" />
+            View Details
+          </Link>
         </Button>
         <Button size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground" onClick={handleAddToCart}>
           <ShoppingCart className="mr-2 h-4 w-4" />
