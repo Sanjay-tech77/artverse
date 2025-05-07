@@ -1,15 +1,15 @@
 
-'use client'; 
+'use client';
 import Link from 'next/link';
 import { Palette, ShoppingCart, Menu, Info, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { 
-  Sheet, 
-  SheetContent, 
-  SheetTrigger, 
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
   SheetClose,
-  SheetHeader, // Added import
-  SheetTitle   // Added import
+  SheetHeader,
+  SheetTitle
 } from '@/components/ui/sheet';
 import React from 'react';
 import { useCart } from '@/context/cart-context';
@@ -18,34 +18,50 @@ import { ThemeToggleButton } from '@/components/theme-toggle-button';
 
 const NavLinks = ({ isMobile = false }: { isMobile?: boolean }) => {
   const commonLinkClass = "text-sm font-medium text-foreground/80 hover:text-foreground transition-colors";
-  const mobileLinkClass = "block py-2 px-3 rounded-md hover:bg-accent"; // Added px and hover bg for consistency
+  // Consistent styling for all mobile links including padding and flex alignment
+  const mobileLinkStyles = "block py-2 px-3 rounded-md hover:bg-accent flex items-center";
 
   const LinkWrapper = isMobile ? SheetClose : React.Fragment;
 
+  const linksConfig = [
+    { href: "/", label: "Home", icon: null, id: "home" },
+    { href: "/#gallery", label: "Gallery", icon: null, id: "gallery" },
+    { href: "/artists", label: "Artists", icon: Users, id: "artists" },
+    { href: "/about", label: "About", icon: Info, id: "about" },
+  ];
+
   return (
     <>
-      <LinkWrapper>
-        <Link href="/" className={`${commonLinkClass} ${isMobile ? mobileLinkClass : ''}`}>
-          Home
-        </Link>
-      </LinkWrapper>
-      <LinkWrapper>
-        <Link href="/#gallery" className={`${commonLinkClass} ${isMobile ? mobileLinkClass : ''}`}>
-          Gallery
-        </Link>
-      </LinkWrapper>
-      <LinkWrapper>
-        <Link href="/artists" className={`${commonLinkClass} ${isMobile ? mobileLinkClass : ''} flex items-center`}>
-          <Users className="mr-2 h-4 w-4" /> {/* Adjusted for mobile */}
-          Artists
-        </Link>
-      </LinkWrapper>
-      <LinkWrapper>
-        <Link href="/about" className={`${commonLinkClass} ${isMobile ? mobileLinkClass : ''} flex items-center`}>
-          <Info className="mr-2 h-4 w-4" /> {/* Adjusted for mobile */}
-          About
-        </Link>
-      </LinkWrapper>
+      {linksConfig.map(({ href, label, icon: IconComponent, id }) => {
+        let linkClassName = commonLinkClass;
+        if (isMobile) {
+          linkClassName = `${commonLinkClass} ${mobileLinkStyles}`;
+        } else {
+          // For desktop, add flex items-center only if there's an icon
+          if (IconComponent) {
+            linkClassName = `${commonLinkClass} flex items-center`;
+          }
+        }
+
+        return (
+          <LinkWrapper key={id}>
+            <Link href={href} className={linkClassName}>
+              {isMobile ? (
+                // Mobile: Render Icon or a Spacer for alignment
+                IconComponent ? (
+                  <IconComponent className="mr-2 h-4 w-4 flex-shrink-0" />
+                ) : (
+                  <span className="mr-2 h-4 w-4 flex-shrink-0"></span> // Spacer to align text
+                )
+              ) : (
+                // Desktop: Render Icon if available, no spacer needed for non-icon links
+                IconComponent && <IconComponent className="mr-2 h-4 w-4" />
+              )}
+              <span>{label}</span>
+            </Link>
+          </LinkWrapper>
+        );
+      })}
     </>
   );
 };
@@ -55,9 +71,9 @@ export function Header() {
   const { cartItems } = useCart();
   const itemCount = cartItems.reduce((count, item) => count + item.quantity, 0);
 
-  // Define classes here to reuse for the cart link in mobile nav
   const commonMobileLinkClass = "text-sm font-medium text-foreground/80 hover:text-foreground transition-colors";
-  const mobileSpecificLinkClass = "block py-2 px-3 rounded-md hover:bg-accent flex items-center";
+  // This class should match the `mobileLinkStyles` in NavLinks for consistency
+  const mobileCartLinkClass = "block py-2 px-3 rounded-md hover:bg-accent flex items-center";
 
 
   return (
@@ -67,7 +83,7 @@ export function Header() {
           <Palette className="h-7 w-7 text-primary" />
           <span className="text-xl font-semibold tracking-tight">ArtVerse Gallery</span>
         </Link>
-        
+
         <nav className="hidden md:flex items-center space-x-6">
           <NavLinks />
         </nav>
@@ -90,19 +106,19 @@ export function Header() {
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] sm:w-[320px]"> {/* Adjusted width and padding via className if needed, default p-6 is from sheetVariants */}
-              <SheetHeader className="pb-4"> {/* Add padding bottom to header or adjust nav padding */}
+            <SheetContent side="right" className="w-[280px] sm:w-[320px]">
+              <SheetHeader className="pb-4 border-b mb-4"> {/* Added border and margin for separation */}
                 <SheetTitle>Menu</SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col space-y-1">
                 <NavLinks isMobile={true} />
                  <SheetClose asChild>
-                    <Link 
-                      href="/checkout" 
-                      className={`${commonMobileLinkClass} ${mobileSpecificLinkClass}`}
+                    <Link
+                      href="/checkout"
+                      className={`${commonMobileLinkClass} ${mobileCartLinkClass}`}
                     >
-                      <ShoppingCart className="mr-2 h-4 w-4" />
-                      Cart {itemCount > 0 && `(${itemCount > 9 ? '9+' : itemCount})`}
+                      <ShoppingCart className="mr-2 h-4 w-4 flex-shrink-0" />
+                      <span>Cart {itemCount > 0 && `(${itemCount > 9 ? '9+' : itemCount})`}</span>
                     </Link>
                   </SheetClose>
               </nav>
