@@ -6,7 +6,7 @@ import type { CartItem } from '@/types/cart';
 import { useCart } from '@/context/cart-context';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, Minus } from 'lucide-react'; // Removed Trash2
+import { Plus, Minus } from 'lucide-react'; 
 import { generateFamousPaintingHint } from '@/lib/utils';
 import { useState } from 'react';
 
@@ -27,20 +27,20 @@ export function CartItemDisplay({ item }: CartItemDisplayProps) {
     removeFromCart(item.id);
   };
 
-  // Updated placeholder dimensions: w-24 (96px), h-28 (112px)
-  const placeholderImageUrl = `https://picsum.photos/seed/cart-${item.id}/96/112`;
+  // Increased image dimensions: w-28 (112px), h-36 (144px)
+  const placeholderImageUrl = `https://picsum.photos/seed/cart-${item.id}/112/144`;
 
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 py-4 border-b last:border-b-0">
       {/* Group 1: Image and Info */}
       <div className="flex flex-col items-center w-full sm:flex-row sm:items-center gap-3 sm:gap-4 sm:flex-1">
         {/* Increased image container size */}
-        <div className="relative h-28 w-24 rounded-md overflow-hidden flex-shrink-0">
+        <div className="relative h-36 w-28 rounded-md overflow-hidden flex-shrink-0"> {/* Increased h-28 to h-36 and w-24 to w-28 */}
           <Image
             src={imageError ? placeholderImageUrl : item.imageUrl}
             alt={item.title}
             fill
-            sizes="96px" // Updated sizes prop to match new width
+            sizes="112px" // Updated sizes prop to match new width (112px for w-28)
             className="object-cover"
             onError={() => setImageError(true)}
             data-ai-hint={generateFamousPaintingHint(item.title)}
@@ -105,3 +105,4 @@ export function CartItemDisplay({ item }: CartItemDisplayProps) {
     </div>
   );
 }
+
