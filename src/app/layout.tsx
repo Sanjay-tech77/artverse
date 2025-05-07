@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { CartProvider } from '@/context/cart-context';
+import { ThemeProvider } from '@/context/theme-context';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -25,12 +26,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
-        <CartProvider>
-          {children}
-          <Toaster />
-        </CartProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <CartProvider>
+            {children}
+            <Toaster />
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
